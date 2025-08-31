@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: chatapp-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - chatapp-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chatapp-backend
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mongo
+    environment:
+      - PORT=3005
+      - MONGO_DB_URI=mongodb://mongo:27017/chatdb
+      - JWT_SECRET=myBiggestSecret
+      - CLIENT_ORIGIN=http://localhost:3000
+      - NODE_ENV=development
+    networks:
+      - chatapp-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: chatapp-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:3005   # ✅ browser can access backend
+    networks:
+      - chatapp-net
+
+volumes:
+  mongo-data:
+
+networks:
+  chatapp-net:
+    driver: bridge
