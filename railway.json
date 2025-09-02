@@ -2,9 +2,9 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacksConfig": {
-      "install": "npm install --prefix backend",
-      "build": "npm run build --prefix backend || echo 'no build step'",
-      "start": "npm start --prefix backend"
+      "install": "cd backend && npm install",
+      "build": "cd backend && npm run build || echo 'no build step'",
+      "start": "cd backend && node server.js"
     }
   }
 }
