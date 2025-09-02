@@ -2,21 +2,9 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacksConfig": {
-      "phases": {
-        "setup": {
-          "nixPkgs": ["nodejs", "npm"]
-        },
-        "install": {
-          "cmds": ["npm install"]
-        },
-        "build": {
-          "cmds": ["npm run build || echo 'no build step'"]
-        },
-        "start": {
-          "cmds": ["node index.js"]
-        }
-      },
-      "start": "node backend/index.js"
+      "install": "npm install --prefix backend",
+      "build": "npm run build --prefix backend || echo 'no build step'",
+      "start": "npm start --prefix backend"
     }
   }
 }
