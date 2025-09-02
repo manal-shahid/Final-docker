@@ -1,10 +1,7 @@
 {
   "build": {
     "builder": "NIXPACKS",
-    "nixpacksConfig": {
-      "install": "cd backend && npm install",
-      "build": "cd backend && npm run build || echo 'no build step'",
-      "start": "cd backend && node server.js"
-    }
+    "buildCommand": "cd backend && npm install && npm run build || echo 'no build step'",
+    "startCommand": "cd backend && node server.js"
   }
 }
