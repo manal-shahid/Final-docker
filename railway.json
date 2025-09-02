@@ -13,7 +13,7 @@
           "cmds": ["cd backend && npm run build || echo 'no build step'"]
         },
         "start": {
-          "cmds": ["cd backend && npm start"]
+          "cmds": ["cd backend && node index.js"]
         }
       }
     }
