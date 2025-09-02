@@ -1,0 +1,21 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "nixpacksPlan": {
+      "phases": {
+        "setup": {
+          "nixPkgs": ["nodejs", "npm"]
+        },
+        "install": {
+          "cmds": ["cd backend && npm install"]
+        },
+        "build": {
+          "cmds": ["cd backend && npm run build || echo 'no build step'"]
+        },
+        "start": {
+          "cmds": ["cd backend && npm start"]
+        }
+      }
+    }
+  }
+}
